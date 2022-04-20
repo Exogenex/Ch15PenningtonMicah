@@ -65,12 +65,56 @@ public:
 	}
 	double getPayRate() const { return payRate; }
 };
+#pragma endregion All code in this region was provided to me by my teacher
 
+class ShiftSupervisor : public Employee {
+private:
+	double annualSalary;
+	double annualBonus;
+public:
+	// Constructor
+	ShiftSupervisor(string nameIN = "", string numberIN = "", string hireDateIN = "", double annualSalaryIN = 0, double annualBonusIN = 0) :
+		Employee(nameIN, numberIN, hireDateIN) { annualSalary = annualSalaryIN; annualBonus = annualBonusIN; }
 
+	// Setters
+	void setAnnualSalary(double annualSalaryIN) { annualSalary = annualSalaryIN; }
+	void setAnnualBonus(double annualBonusIN) { annualBonus = annualBonusIN; }
+
+	// Getters
+	double getAnnualSalary() { return annualSalary; }
+	double getAnnualBonus() { return annualBonus; }
+};
+
+class TeamLeader : public ProductionWorker {
+private:
+	double monthlyBonus;
+	int trainingHoursRequired;
+	int trainingHoursAttended;
+public:
+	TeamLeader(string nameIN = "", string numberIN = "", string dateIN = "", int shiftIN = 0, double payRateIN = 0.0, double monthlyBonusIN = 0.0, int trainingHoursRequiredIN = 0, int trainingHoursAttendedIN = 0) :
+		ProductionWorker(nameIN, numberIN, dateIN, shiftIN, payRateIN) {
+		monthlyBonus = monthlyBonusIN;  trainingHoursRequired = trainingHoursRequiredIN; trainingHoursAttended = trainingHoursAttendedIN;
+	}
+
+	// Setters
+	void setMonthlyBonus(double monthlyBonusIN) { monthlyBonus = monthlyBonusIN; }
+	void setTrainingHoursRequired(int trainingHoursRequiredIN) { trainingHoursRequired = trainingHoursRequiredIN; }
+	void setTrainingHoursAttended(int trainingHoursAttendedIN) { trainingHoursAttended = trainingHoursAttendedIN; }
+
+	// Getters
+	double getMonthlyBonus() { return monthlyBonus; }
+	int getTrainingHoursRequired() { return trainingHoursRequired; }
+	int getTrainingHoursAttended() { return trainingHoursAttended; }
+};
+
+#pragma region Not_Micah_Penningtons_Code
 // Chapter 15, Programming Challenge 1: Employee and ProductionWorker classes
 // Function prototype
 void displayInfo(ProductionWorker);
 #pragma endregion All code in this region was provided to me by my teacher
+void displayInfo(ShiftSupervisor);
+void displayInfo(TeamLeader);
+
 
 
 int main() {
@@ -78,10 +122,14 @@ int main() {
 	ProductionWorker pw("John Jones", "123", "10/12/2010", 2, 18.00);
 	displayInfo(pw);
 #pragma endregion All code in this region was provided to me by my teacher
+	cout << '\n';
+	ShiftSupervisor ss("David Smith", "007", "3/25/2015", 90000.00, 2000.00);
+	displayInfo(ss);
+	cout << '\n';
+	TeamLeader tl("Kaladin Stormblessed", "10", "8/31/2010", 1, 16.61, 108.01, 8, 0);
+	displayInfo(tl);
 
-
-
-	return 0;
+	return EXIT_SUCCESS;
 }
 
 #pragma region Not_Micah_Penningtons_Code
@@ -99,3 +147,33 @@ void displayInfo(ProductionWorker e) {
 	cout << "Pay rate: " << e.getPayRate() << endl;
 }
 #pragma endregion All code in this region was provided to me by my teacher
+
+/// <summary>
+/// The displayInfo function displays a shift supervisor's employment information.
+/// </summary>
+/// <param name="e">The shift supervisor to display</param>
+void displayInfo(ShiftSupervisor e) {
+	cout << setprecision(2) << fixed << showpoint
+		<< "Name: " << e.getName() << '\n'
+		<< "Employee number: " << e.getNumber() << '\n'
+		<< "Hire date: " << e.getHireDate() << '\n'
+		<< "Annual Salary: " << e.getAnnualSalary() << '\n'
+		<< "Annual Bonus: " << e.getAnnualBonus() << '\n';
+}
+
+/// <summary>
+/// The displayInfo function displays a shift supervisor's employment information.
+/// </summary>
+/// <param name="e">The shift supervisor to display</param>
+void displayInfo(TeamLeader e) {
+	cout << setprecision(2) << fixed << showpoint
+		<< "Name: " << e.getName() << '\n'
+		<< "Employee number: " << e.getNumber() << '\n'
+		<< "Hire date: " << e.getHireDate() << '\n'
+		<< "Monthly Bonus: " << e.getMonthlyBonus() << '\n'
+		<< "Shift: " << e.getShiftName() << '\n'
+		<< "Shift number: " << e.getShiftNumber() << '\n'
+		<< "Pay rate: " << e.getPayRate() << '\n'
+		<< "Training Hours Required: " << e.getTrainingHoursRequired() << '\n'
+		<< "Training Hours Attended: " << e.getTrainingHoursAttended() << '\n';
+}
